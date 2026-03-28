@@ -23,7 +23,7 @@ class RustStreamSink<T> {
   }
 
   /// The Dart stream for the Rust sink
-  Stream<T> get stream => _stream;
+  Stream<T> get stream => _stream.asBroadcastStream();
 }
 
 class _State<T> {
@@ -50,7 +50,6 @@ _State<T> _setup<T>(
         }
       }
     } finally {
-      receivePort.close();
       await controller.close();
     }
   }());
