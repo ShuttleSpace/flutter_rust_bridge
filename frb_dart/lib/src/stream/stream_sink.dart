@@ -9,12 +9,12 @@ import 'package:flutter_rust_bridge/src/utils/port_generator.dart';
 class RustStreamSink<T> {
   _State<T>? _state;
   final StreamController<T> _controller = StreamController<T>.broadcast();
-  late final Stream<T> _stream = () {
-    final stream = _controller.stream.listenAndBuffer();
-    // Dummy listener to prevent pausing, allowing the controller to be closed.
-    stream.listen(null);
-    return stream;
-  }();
+  late final Stream<T> _stream;
+
+  /// {@macro flutter_rust_bridge.only_for_generated_code}
+  RustStreamSink() {
+    _stream = _controller.stream.listenAndBuffer();
+  }
 
   /// {@macro flutter_rust_bridge.only_for_generated_code}
   String setupAndSerialize({required BaseCodec<T, dynamic, dynamic> codec}) {
@@ -23,7 +23,7 @@ class RustStreamSink<T> {
   }
 
   /// The Dart stream for the Rust sink
-  Stream<T> get stream => _stream.asBroadcastStream();
+  Stream<T> get stream => _stream;
 }
 
 class _State<T> {
