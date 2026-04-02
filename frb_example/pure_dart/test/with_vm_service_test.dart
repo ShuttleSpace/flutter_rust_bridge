@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'package:frb_example_pure_dart/src/rust/api/dart_opaque.dart';
 import 'package:frb_example_pure_dart/src/rust/api/dart_opaque_sync.dart';
@@ -148,18 +147,16 @@ Future<void> main() async {
 
   group('Rust StreamSink memory profile', () {
     Future<({int before, int after, int growth, int consumed})> runScenario({
-      required bool replay,
       required int listenerCount,
       required int emitCount,
     }) async {
-      final sink = RustStreamSink<int>(replay: replay);
-      await storeStreamSinkTwinNormal(sink: sink);
+      final stream = storeStreamSinkTwinNormal();
       addTearDown(clearStoredStreamSinkTwinNormal);
 
       var consumed = 0;
       final subscriptions = <StreamSubscription<int>>[];
       for (var i = 0; i < listenerCount; i++) {
-        subscriptions.add(sink.stream.listen((_) => consumed++));
+        subscriptions.add(stream.listen((_) => consumed++));
       }
 
       final before = (await vmService.heapUsage()) ?? 0;
@@ -183,43 +180,29 @@ Future<void> main() async {
     test('report heap profile under no/single/multi listener', () async {
       const emitCount = 20000;
 
-      final noListenerReplayFalse = await runScenario(
-        replay: false,
+      final noListener = await runScenario(
         listenerCount: 0,
         emitCount: emitCount,
       );
-      final noListenerReplayTrue = await runScenario(
-        replay: true,
-        listenerCount: 0,
-        emitCount: emitCount,
-      );
-      final singleListenerReplayTrue = await runScenario(
-        replay: true,
+      final singleListener = await runScenario(
         listenerCount: 1,
         emitCount: emitCount,
       );
-      final multiListenerReplayTrue = await runScenario(
-        replay: true,
+      final multiListener = await runScenario(
         listenerCount: 2,
         emitCount: emitCount,
       );
 
-      print('heap growth replay=false no-listener: '
-          '${noListenerReplayFalse.growth}');
-      print('heap growth replay=true  no-listener: '
-          '${noListenerReplayTrue.growth}');
-      print('heap growth replay=true  single-listener: '
-          '${singleListenerReplayTrue.growth} '
-          '(consumed=${singleListenerReplayTrue.consumed})');
-      print('heap growth replay=true  multi-listener: '
-          '${multiListenerReplayTrue.growth} '
-          '(consumed=${multiListenerReplayTrue.consumed})');
+      print('heap growth no-listener: ${noListener.growth}');
+      print('heap growth single-listener: ${singleListener.growth} '
+          '(consumed=${singleListener.consumed})');
+      print('heap growth multi-listener: ${multiListener.growth} '
+          '(consumed=${multiListener.consumed})');
 
-      expect(noListenerReplayFalse.before, greaterThanOrEqualTo(0));
-      expect(noListenerReplayFalse.after, greaterThanOrEqualTo(0));
-      expect(noListenerReplayTrue.after, greaterThanOrEqualTo(0));
-      expect(singleListenerReplayTrue.consumed, greaterThan(0));
-      expect(multiListenerReplayTrue.consumed, greaterThan(0));
+      expect(noListener.before, greaterThanOrEqualTo(0));
+      expect(noListener.after, greaterThanOrEqualTo(0));
+      expect(singleListener.consumed, greaterThan(0));
+      expect(multiListener.consumed, greaterThan(0));
     });
   });
 }
