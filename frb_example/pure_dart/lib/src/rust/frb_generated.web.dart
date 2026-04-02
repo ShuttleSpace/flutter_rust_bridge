@@ -43703,6 +43703,11 @@ class RustLibWire implements BaseWire {
   void wire__crate__api__customization__check_init_done(NativePortType port_) =>
       wasmModule.wire__crate__api__customization__check_init_done(port_);
 
+  void wire__crate__api__stream__clear_stored_stream_sink_twin_normal(
+          NativePortType port_) =>
+      wasmModule.wire__crate__api__stream__clear_stored_stream_sink_twin_normal(
+          port_);
+
   void wire__crate__api__dart_opaque__clone_dart_opaque_twin_normal(
           NativePortType port_, PlatformPointer opaque) =>
       wasmModule.wire__crate__api__dart_opaque__clone_dart_opaque_twin_normal(
@@ -59355,6 +59360,29 @@ class RustLibWire implements BaseWire {
               .wire__crate__api__pseudo_manual__method_twin_sync__static_only_twin_sync_static_method_twin_sync(
                   a);
 
+  void wire__crate__api__stream__store_stream_sink_twin_normal(
+          NativePortType port_, String sink) =>
+      wasmModule.wire__crate__api__stream__store_stream_sink_twin_normal(
+          port_, sink);
+
+  void wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal(
+          NativePortType port_, String message) =>
+      wasmModule
+          .wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal(
+              port_, message);
+
+  void wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal(
+          NativePortType port_, int count) =>
+      wasmModule
+          .wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal(
+              port_, count);
+
+  void wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal(
+          NativePortType port_, int total, JSAny interval_millis) =>
+      wasmModule
+          .wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal(
+              port_, total, interval_millis);
+
   void wire__crate__api__stream_misc__stream_sink_dart_async_twin_normal(
           NativePortType port_, String sink) =>
       wasmModule
@@ -59369,6 +59397,22 @@ class RustLibWire implements BaseWire {
       wasmModule
           .wire__crate__api__pseudo_manual__stream_misc_twin_sse__stream_sink_dart_async_twin_sse(
               port_, ptr_, rust_vec_len_, data_len_);
+
+  void wire__crate__api__stream__stream_sink_emit_many_twin_normal(
+          NativePortType port_, String sink, int count) =>
+      wasmModule.wire__crate__api__stream__stream_sink_emit_many_twin_normal(
+          port_, sink, count);
+
+  void wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal(
+          NativePortType port_, String sink, int count, JSAny hold_millis) =>
+      wasmModule
+          .wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal(
+              port_, sink, count, hold_millis);
+
+  void wire__crate__api__stream__stream_sink_emit_range_twin_normal(
+          NativePortType port_, String sink, int count) =>
+      wasmModule.wire__crate__api__stream__stream_sink_emit_range_twin_normal(
+          port_, sink, count);
 
   void wire__crate__api__stream__stream_sink_fixed_sized_primitive_array_twin_normal(
           NativePortType port_, String sink) =>
@@ -66194,6 +66238,9 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
           int data_len_);
 
   external void wire__crate__api__customization__check_init_done(
+      NativePortType port_);
+
+  external void wire__crate__api__stream__clear_stored_stream_sink_twin_normal(
       NativePortType port_);
 
   external void wire__crate__api__dart_opaque__clone_dart_opaque_twin_normal(
@@ -77119,6 +77166,21 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
       wire__crate__api__pseudo_manual__method_twin_sync__static_only_twin_sync_static_method_twin_sync(
           int a);
 
+  external void wire__crate__api__stream__store_stream_sink_twin_normal(
+      NativePortType port_, String sink);
+
+  external void
+      wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal(
+          NativePortType port_, String message);
+
+  external void
+      wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal(
+          NativePortType port_, int count);
+
+  external void
+      wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal(
+          NativePortType port_, int total, JSAny interval_millis);
+
   external void
       wire__crate__api__stream_misc__stream_sink_dart_async_twin_normal(
           NativePortType port_, String sink);
@@ -77129,6 +77191,16 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
           PlatformGeneralizedUint8ListPtr ptr_,
           int rust_vec_len_,
           int data_len_);
+
+  external void wire__crate__api__stream__stream_sink_emit_many_twin_normal(
+      NativePortType port_, String sink, int count);
+
+  external void
+      wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal(
+          NativePortType port_, String sink, int count, JSAny hold_millis);
+
+  external void wire__crate__api__stream__stream_sink_emit_range_twin_normal(
+      NativePortType port_, String sink, int count);
 
   external void
       wire__crate__api__stream__stream_sink_fixed_sized_primitive_array_twin_normal(
