@@ -85,6 +85,20 @@ Future<void> lintDart(LintConfig config) async {
 /// pure_dart_pde does *NOT* run ffigen, but use our codegen to directly generate.
 /// this lint ensures what we generate is *EQUAL* to what ffigen generates.
 Future<void> lintDartFfigen() async {
+  String normalizeChunk(String text) {
+    // ffigen and manual generation can differ in trailing commas for
+    // parameter/argument lists. Ignore this formatting-only difference.
+    var ans = text;
+    while (true) {
+      final replaced = ans.replaceAll(RegExp(r',\s*\)'), ')');
+      if (replaced == ans) break;
+      ans = replaced;
+    }
+    // They can also differ in line wrapping/indentation.
+    ans = ans.replaceAll(RegExp(r'\s+'), '');
+    return ans;
+  }
+
   String readInterestText(String name) {
     final path =
         '${exec.pwd}frb_example/$name/lib/src/rust/frb_generated.io.dart';
@@ -95,14 +109,15 @@ Future<void> lintDartFfigen() async {
     return text.substring(start + 1, findMatchingBracket(text, start));
   }
 
-  final textMatcher = readInterestText('pure_dart');
+  final textMatcher = normalizeChunk(readInterestText('pure_dart'));
   final textActual = readInterestText('pure_dart_pde');
 
   final actualChunks = textActual.split('\n\n');
   for (final actualChunk in actualChunks) {
     final modifiedActualChunk = actualChunk.replaceAll(
         'frbgen_frb_example_pure_dart_pde', 'frbgen_frb_example_pure_dart');
-    if (!textMatcher.contains(modifiedActualChunk)) {
+    final normalizedActualChunk = normalizeChunk(modifiedActualChunk);
+    if (!textMatcher.contains(normalizedActualChunk)) {
       throw Exception('Fail to find chunk (`$modifiedActualChunk`)');
     }
   }
@@ -124,9 +139,43 @@ Future<void> lintDartVersion() async {
 
 Future<void> lintDartFormat(LintConfig config) async {
   for (final package in kDartPackages) {
-    await exec('dart format ${config.fix ? "" : "--set-exit-if-changed"} .',
+    final packageAbsPath = '${exec.pwd}/$package';
+    final targets = _computeDartFormatTargets(packageAbsPath);
+    if (targets.isEmpty) continue;
+
+    await exec(
+        'dart format ${config.fix ? "" : "--set-exit-if-changed"} ${targets.join(" ")}',
         relativePwd: package);
   }
+}
+
+List<String> _computeDartFormatTargets(String packageAbsPath) {
+  final ans = <String>[];
+
+  for (final dir in [
+    'bin',
+    'lib',
+    'test',
+    'tool',
+    'example',
+    'integration_test',
+    'benchmark',
+    'web',
+  ]) {
+    if (Directory('$packageAbsPath/$dir').existsSync()) {
+      ans.add(dir);
+    }
+  }
+
+  final rootEntities = Directory(packageAbsPath).listSync();
+  for (final entity in rootEntities) {
+    if (entity is File && entity.path.endsWith('.dart')) {
+      final filename = entity.uri.pathSegments.last;
+      ans.add(filename);
+    }
+  }
+
+  return ans;
 }
 
 Future<void> lintDartAnalyze(LintConfig config) async {
