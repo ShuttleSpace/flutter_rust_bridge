@@ -79,6 +79,16 @@ Future<void> main({bool skipRustLibInit = false}) async {
   test('stream_sink_inside_vec_twin_normal', () async {
     final sinks = [RustStreamSink<int>(), RustStreamSink<int>()];
     await streamSinkInsideVecTwinNormal(arg: sinks);
+    expect(await sinks[0].stream.toList(), isEmpty);
+    expect(await sinks[1].stream.toList(), isEmpty);
+  });
+
+  test('stream_sink_inside_vec_twin_normal_with_replay', () async {
+    final sinks = [
+      RustStreamSink<int>(replay: true),
+      RustStreamSink<int>(replay: true),
+    ];
+    await streamSinkInsideVecTwinNormal(arg: sinks);
     expect(await sinks[0].stream.toList(), [100, 200]);
     expect(await sinks[1].stream.toList(), [100, 200]);
   });
@@ -86,6 +96,13 @@ Future<void> main({bool skipRustLibInit = false}) async {
   test('stream_sink_inside_struct_twin_normal', () async {
     final arg = MyStructContainingStreamSinkTwinNormal(
         a: 1000, b: RustStreamSink<int>());
+    await streamSinkInsideStructTwinNormal(arg: arg);
+    expect(await arg.b.stream.toList(), isEmpty);
+  });
+
+  test('stream_sink_inside_struct_twin_normal_with_replay', () async {
+    final arg = MyStructContainingStreamSinkTwinNormal(
+        a: 1000, b: RustStreamSink<int>(replay: true));
     await streamSinkInsideStructTwinNormal(arg: arg);
     expect(await arg.b.stream.toList(), [1000]);
   });
