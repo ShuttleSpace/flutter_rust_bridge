@@ -30,6 +30,15 @@ class VmServiceUtil {
     final profile = await vmService.getAllocationProfile(isolateId, gc: true);
     log('gc triggered (heapUsage=${profile.memoryUsage?.heapUsage})');
   }
+
+  Future<int?> heapUsage({bool triggerGc = true}) async {
+    final isolateId = Service.getIsolateId(Isolate.current)!;
+    final profile =
+        await vmService.getAllocationProfile(isolateId, gc: triggerGc);
+    final heapUsage = profile.memoryUsage?.heapUsage;
+    log('heap usage queried (heapUsage=$heapUsage)');
+    return heapUsage;
+  }
 }
 
 String _toWebSocket(Uri uri) {

@@ -90,6 +90,216 @@ Future<void> main({bool skipRustLibInit = false}) async {
     expect(await arg.b.stream.toList(), [1000]);
   });
 
+  test('rust_stream_sink_stream_replay_true_late_listener', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await streamSinkEmitRangeTwinNormal(sink: sink, count: 16);
+
+    final expected = List.generate(16, (index) => index);
+    expect(await sink.stream.toList(), expected);
+    expect(await sink.stream.toList(), expected);
+  });
+
+  test('rust_stream_sink_stream_replay_false_late_listener', () async {
+    final sink = RustStreamSink<int>(replay: false);
+    await streamSinkEmitRangeTwinNormal(sink: sink, count: 16);
+    expect(await sink.stream.toList(), isEmpty);
+  });
+
+  test('rust_stream_sink_stream_replay_false_live_listener', () async {
+    final sink = RustStreamSink<int>(replay: false);
+    final valuesFuture = sink.stream.take(16).toList();
+
+    await streamSinkEmitRangeTwinNormal(sink: sink, count: 16);
+    expect(await valuesFuture, List.generate(16, (index) => index));
+  });
+
+  test('rust_stream_sink_stream_replay_true_large_data', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await streamSinkEmitManyTwinNormal(sink: sink, count: 2000);
+
+    final values = await sink.stream.toList();
+    expect(values.length, 2000);
+    expect(values.first, 0);
+    expect(values.last, 1999);
+  });
+
+  test('rust_stream_sink_stream_listener_can_cancel_while_sender_active',
+      () async {
+    final sink = RustStreamSink<int>(replay: true);
+
+    final reached = Completer<void>();
+    var received = 0;
+    late final StreamSubscription<int> subscription;
+    subscription = sink.stream.listen((_) {
+      received++;
+      if (!reached.isCompleted && received >= 200) {
+        reached.complete();
+        unawaited(subscription.cancel());
+      }
+    });
+
+    await streamSinkEmitRangeThenHoldTwinNormal(
+      sink: sink,
+      count: 100000,
+      holdMillis: 300,
+    );
+
+    await reached.future.timeout(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(milliseconds: 350));
+    await subscription.cancel();
+    expect(received, greaterThanOrEqualTo(200));
+  });
+
+  test('rust_stream_sink_stream_done_after_sender_close', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await streamSinkEmitRangeThenHoldTwinNormal(
+      sink: sink,
+      count: 64,
+      holdMillis: 50,
+    );
+
+    final values =
+        await sink.stream.toList().timeout(const Duration(seconds: 2));
+    expect(values.length, 64);
+    expect(values.first, 0);
+    expect(values.last, 63);
+  });
+
+  test('stored_stream_sink_replay_true_no_listener_retains_history', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    await storedStreamSinkEmitManyTwinNormal(count: 1024);
+    final values = await sink.stream.toList();
+    expect(values.length, 1024);
+    expect(values.first, 0);
+    expect(values.last, 1023);
+  });
+
+  test('stored_stream_sink_replay_false_no_listener_drops_history', () async {
+    final sink = RustStreamSink<int>(replay: false);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    await storedStreamSinkEmitManyTwinNormal(count: 1024);
+    expect(await sink.stream.toList(), isEmpty);
+  });
+
+  test('stored_stream_sink_multi_listener_receive_massive_data', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    final listener1Future = sink.stream.take(512).toList();
+    final listener2Future = sink.stream.take(512).toList();
+    await storedStreamSinkEmitManyTwinNormal(count: 512);
+
+    final listener1Values = await listener1Future;
+    final listener2Values = await listener2Future;
+    expect(listener1Values.length, 512);
+    expect(listener2Values.length, 512);
+    expect(listener1Values.last, 511);
+    expect(listener2Values.last, 511);
+  });
+
+  test('stored_stream_sink_sender_alive_listener_cancel_then_clear', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    final reached = Completer<void>();
+    var received = 0;
+    late final StreamSubscription<int> subscription;
+    subscription = sink.stream.listen((_) {
+      received++;
+      if (!reached.isCompleted && received >= 200) reached.complete();
+    });
+
+    await storedStreamSinkStartSpamTwinNormal(total: 20000, intervalMillis: 0);
+    await reached.future.timeout(const Duration(seconds: 2));
+    await subscription.cancel();
+    expect(received, greaterThanOrEqualTo(200));
+
+    await clearStoredStreamSinkTwinNormal();
+  });
+
+  test('stored_stream_sink_error_single_listener', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    final events = <String>[];
+    final done = Completer<void>();
+    sink.stream.listen(
+      (e) => events.add('data $e'),
+      onError: (e, s) => events.add('error $e'),
+      onDone: done.complete,
+    );
+
+    await storedStreamSinkEmitManyTwinNormal(count: 2);
+    await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    await done.future.timeout(const Duration(seconds: 2));
+
+    expect(events[0], 'data 0');
+    expect(events[1], 'data 1');
+    expect(events[2], contains('stored sink error'));
+  });
+
+  test('stored_stream_sink_error_multi_listener', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    final events1 = <String>[];
+    final events2 = <String>[];
+    final done1 = Completer<void>();
+    final done2 = Completer<void>();
+
+    sink.stream.listen(
+      (e) => events1.add('data $e'),
+      onError: (e, s) => events1.add('error $e'),
+      onDone: done1.complete,
+    );
+    sink.stream.listen(
+      (e) => events2.add('data $e'),
+      onError: (e, s) => events2.add('error $e'),
+      onDone: done2.complete,
+    );
+
+    await storedStreamSinkEmitManyTwinNormal(count: 2);
+    await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    await Future.wait([
+      done1.future.timeout(const Duration(seconds: 2)),
+      done2.future.timeout(const Duration(seconds: 2)),
+    ]);
+
+    expect(events1.last, contains('stored sink error'));
+    expect(events2.last, contains('stored sink error'));
+  });
+
+  test('stored_stream_sink_error_no_listener_replay_true', () async {
+    final sink = RustStreamSink<int>(replay: true);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    await expectLater(
+      sink.stream.toList(),
+      throwsA(isA<AnyhowException>()
+          .having((x) => x.message, 'message', contains('stored sink error'))),
+    );
+  });
+
+  test('stored_stream_sink_error_no_listener_replay_false', () async {
+    final sink = RustStreamSink<int>(replay: false);
+    await storeStreamSinkTwinNormal(sink: sink);
+    addTearDown(clearStoredStreamSinkTwinNormal);
+
+    await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    expect(await sink.stream.toList(), isEmpty);
+  });
+
   test('func_stream_add_value_and_error_twin_normal', () async {
     final stream = await funcStreamAddValueAndErrorTwinNormal();
     final events = <String>[];
