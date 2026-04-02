@@ -12,8 +12,14 @@ class RustStreamSink<T> {
   late final Stream<T> _stream;
 
   /// {@macro flutter_rust_bridge.only_for_generated_code}
-  RustStreamSink() {
-    _stream = _controller.stream.listenAndBuffer();
+  /// when [replay] is false, subsequent stream listeners do not receive the previous data.
+  /// When [replay] is true, subsequent stream listeners can receive all the data sent before (in the case of infinite streams or large data streams, it can cause memory overflow!). ）
+  RustStreamSink({bool replay = true}) {
+    if (replay) {
+      _stream = _controller.stream.listenAndBuffer().asBroadcastStream();
+    } else {
+      _stream = _controller.stream.asBroadcastStream();
+    }
   }
 
   /// {@macro flutter_rust_bridge.only_for_generated_code}
@@ -24,6 +30,12 @@ class RustStreamSink<T> {
 
   /// The Dart stream for the Rust sink
   Stream<T> get stream => _stream;
+
+  /// cancel stream in case memory inifinty increased.
+  Future<void> cancel() async {
+    final subscription = _stream.listen(null);
+    await subscription.cancel();
+  }
 }
 
 class _State<T> {
