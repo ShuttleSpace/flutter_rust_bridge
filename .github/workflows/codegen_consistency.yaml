@@ -3,7 +3,7 @@ name: Codegen Consistency
 on:
   push:
     branches:
-      - mainx
+      - master
   pull_request: {}
   workflow_dispatch: {}
 
