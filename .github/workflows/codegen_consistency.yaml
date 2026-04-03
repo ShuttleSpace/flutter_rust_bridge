@@ -44,17 +44,22 @@ jobs:
       - name: Generate internal
         id: generate_internal
         continue-on-error: true
-        run: ./frb_internal generate-internal --set-exit-if-changed --coverage
+        run: ./frb_internal generate-internal --coverage
 
       - name: Generate pure_dart codegen command output
         id: generate_pure_dart
         continue-on-error: true
-        run: ./frb_internal generate-run-frb-codegen-command-generate --set-exit-if-changed --package frb_example/pure_dart --coverage
+        run: ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart --coverage
+
+      - name: Generate pure_dart_pde codegen command output
+        id: generate_pure_dart_pde
+        continue-on-error: true
+        run: ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart_pde --coverage
 
       - name: Generate integrate command output
         id: generate_integrate
         continue-on-error: true
-        run: ./frb_internal generate-run-frb-codegen-command-integrate --set-exit-if-changed --package frb_example/flutter_package --coverage
+        run: ./frb_internal generate-run-frb-codegen-command-integrate --package frb_example/flutter_package --coverage
 
       - name: Collect codegen diff
         if: always()
@@ -78,8 +83,19 @@ jobs:
           if-no-files-found: error
 
       - name: Fail when generated code is not up to date
-        if: steps.generate_internal.outcome != 'success' || steps.generate_pure_dart.outcome != 'success' || steps.generate_integrate.outcome != 'success'
+        if: always()
         run: |
-          echo "Generated code is out of date or generation failed."
-          echo "Download artifact 'codegen-diff-*' for the patch."
-          exit 1
+          command_failed=false
+          if [ "${{ steps.generate_internal.outcome }}" != "success" ]; then command_failed=true; fi
+          if [ "${{ steps.generate_pure_dart.outcome }}" != "success" ]; then command_failed=true; fi
+          if [ "${{ steps.generate_pure_dart_pde.outcome }}" != "success" ]; then command_failed=true; fi
+          if [ "${{ steps.generate_integrate.outcome }}" != "success" ]; then command_failed=true; fi
+
+          diff_changed=false
+          if ! git diff --quiet; then diff_changed=true; fi
+
+          if [ "$command_failed" = true ] || [ "$diff_changed" = true ]; then
+            echo "Generated code is out of date or generation failed."
+            echo "Download artifact 'codegen-diff-*' for the patch."
+            exit 1
+          fi
