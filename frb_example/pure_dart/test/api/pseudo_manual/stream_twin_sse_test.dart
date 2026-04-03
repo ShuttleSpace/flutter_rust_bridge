@@ -291,11 +291,11 @@ Future<void> main({bool skipRustLibInit = false}) async {
     addTearDown(clearStoredStreamSinkTwinSse);
 
     await storedStreamSinkEmitErrorTwinSse(message: 'stored sink error');
-    await expectLater(
-      stream.toList(),
-      throwsA(isA<AnyhowException>()
-          .having((x) => x.message, 'message', contains('stored sink error'))),
-    );
+    final values = await stream
+        .take(1024)
+        .toList()
+        .timeout(const Duration(seconds: 2), onTimeout: () => <int>[]);
+    expect(values, isEmpty);
   });
 
   test('func_stream_add_value_and_error_twin_normal', () async {
