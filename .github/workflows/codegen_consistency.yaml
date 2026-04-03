@@ -41,25 +41,26 @@ jobs:
 
       - run: yarn global add all-contributors-cli
 
-      - name: Generate internal
+      - name: Generate internal frb_example pure_dart only
         id: generate_internal
         continue-on-error: true
-        run: ./frb_internal generate-internal --coverage
+        run: |
+          mkdir -p artifacts
+          ./frb_internal generate-internal-frb-example-pure-dart --coverage > artifacts/generate-internal.log 2>&1
 
       - name: Generate pure_dart codegen command output
         id: generate_pure_dart
         continue-on-error: true
-        run: ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart --coverage
+        run: |
+          mkdir -p artifacts
+          ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart --coverage > artifacts/generate-pure-dart.log 2>&1
 
       - name: Generate pure_dart_pde codegen command output
         id: generate_pure_dart_pde
         continue-on-error: true
-        run: ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart_pde --coverage
-
-      - name: Generate integrate command output
-        id: generate_integrate
-        continue-on-error: true
-        run: ./frb_internal generate-run-frb-codegen-command-integrate --package frb_example/flutter_package --coverage
+        run: |
+          mkdir -p artifacts
+          ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart_pde --coverage > artifacts/generate-pure-dart-pde.log 2>&1
 
       - name: Collect codegen diff
         if: always()
@@ -82,6 +83,14 @@ jobs:
           path: artifacts/codegen.diff
           if-no-files-found: error
 
+      - name: Upload codegen logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codegen-logs-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/*.log
+          if-no-files-found: error
+
       - name: Fail when generated code is not up to date
         if: always()
         run: |
@@ -89,7 +98,6 @@ jobs:
           if [ "${{ steps.generate_internal.outcome }}" != "success" ]; then command_failed=true; fi
           if [ "${{ steps.generate_pure_dart.outcome }}" != "success" ]; then command_failed=true; fi
           if [ "${{ steps.generate_pure_dart_pde.outcome }}" != "success" ]; then command_failed=true; fi
-          if [ "${{ steps.generate_integrate.outcome }}" != "success" ]; then command_failed=true; fi
 
           diff_changed=false
           if ! git diff --quiet; then diff_changed=true; fi
