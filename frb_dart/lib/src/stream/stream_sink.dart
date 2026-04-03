@@ -13,7 +13,7 @@ class RustStreamSink<T> {
 
   /// {@macro flutter_rust_bridge.only_for_generated_code}
   /// when [replay] is false, subsequent stream listeners do not receive the previous data.
-  /// When [replay] is true, subsequent stream listeners can receive all the data sent before (in the case of infinite streams or large data streams, it can cause memory overflow!). ）
+  /// When [replay] is true, the first subsequent stream listeners can receive all the data sent before (in the case of infinite streams or large data streams, it can cause memory overflow!). ）
   RustStreamSink({bool replay = true}) {
     if (replay) {
       _stream = _controller.stream.listenAndBuffer().asBroadcastStream();
