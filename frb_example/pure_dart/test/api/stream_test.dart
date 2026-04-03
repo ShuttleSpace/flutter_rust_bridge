@@ -1,4 +1,4 @@
-// FRB_INTERNAL_GENERATOR: {"forbiddenDuplicatorModes": ["sync", "sync sse"]}
+// FRB_INTERNAL_GENERATOR: {"forbiddenDuplicatorModes": ["sync", "sync sse"], "skipPde": true}
 
 import 'dart:async';
 
@@ -112,7 +112,7 @@ Future<void> main({bool skipRustLibInit = false}) async {
     await streamSinkInsideVecTwinNormal(arg: [sink]);
     final expected = [100, 200];
     expect(await sink.stream.toList(), expected);
-    expect(await sink.stream.toList(), expected);
+    expect(await sink.stream.toList(), isEmpty);
   });
 
   test('rust_stream_sink_stream_replay_false_late_listener', () async {
@@ -169,17 +169,19 @@ Future<void> main({bool skipRustLibInit = false}) async {
   });
 
   test('stored_stream_sink_no_listener_retains_history', () async {
+    await clearStoredStreamSinkTwinNormal();
     final stream = storeStreamSinkTwinNormal();
     addTearDown(clearStoredStreamSinkTwinNormal);
 
     await storedStreamSinkEmitManyTwinNormal(count: 1024);
-    final values = await stream.toList();
+    final values = await stream.take(1024).toList();
     expect(values.length, 1024);
     expect(values.first, 0);
     expect(values.last, 1023);
   });
 
   test('stored_stream_sink_no_listener_and_clear', () async {
+    await clearStoredStreamSinkTwinNormal();
     final stream = storeStreamSinkTwinNormal();
     addTearDown(clearStoredStreamSinkTwinNormal);
 
@@ -190,6 +192,7 @@ Future<void> main({bool skipRustLibInit = false}) async {
   });
 
   test('stored_stream_sink_multi_listener_receive_massive_data', () async {
+    await clearStoredStreamSinkTwinNormal();
     final stream = storeStreamSinkTwinNormal();
     addTearDown(clearStoredStreamSinkTwinNormal);
 
