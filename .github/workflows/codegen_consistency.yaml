@@ -46,3 +46,6 @@ jobs:
 
       - name: Generate pure_dart codegen command output
         run: ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart --coverage
+
+      - name: git diff
+        run: git diff --exit-code
