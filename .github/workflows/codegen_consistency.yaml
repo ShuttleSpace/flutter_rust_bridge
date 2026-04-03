@@ -50,42 +50,42 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-internal --set-exit-if-changed --coverage > artifacts/generate-internal.log 2>&1
+          ./frb_internal generate-internal --coverage > artifacts/generate-internal.log 2>&1
 
       - name: Generate pure_dart codegen command output
         id: generate_pure_dart
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-run-frb-codegen-command-generate --set-exit-if-changed --package frb_example/pure_dart --coverage > artifacts/generate-pure-dart.log 2>&1
+          ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart --coverage > artifacts/generate-pure-dart.log 2>&1
 
       - name: Generate pure_dart_pde codegen command output
         id: generate_pure_dart_pde
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-run-frb-codegen-command-generate --set-exit-if-changed --package frb_example/pure_dart_pde --coverage > artifacts/generate-pure-dart-pde.log 2>&1
+          ./frb_internal generate-run-frb-codegen-command-generate --package frb_example/pure_dart_pde --coverage > artifacts/generate-pure-dart-pde.log 2>&1
 
       - name: Generate flutter_via_create integrate output
         id: generate_integrate_flutter_via_create
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-run-frb-codegen-command-integrate --set-exit-if-changed --package frb_example/flutter_via_create --coverage > artifacts/generate-integrate-flutter-via-create.log 2>&1
+          ./frb_internal generate-run-frb-codegen-command-integrate --package frb_example/flutter_via_create --coverage > artifacts/generate-integrate-flutter-via-create.log 2>&1
 
       - name: Generate flutter_via_integrate integrate output
         id: generate_integrate_flutter_via_integrate
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-run-frb-codegen-command-integrate --set-exit-if-changed --package frb_example/flutter_via_integrate --coverage > artifacts/generate-integrate-flutter-via-integrate.log 2>&1
+          ./frb_internal generate-run-frb-codegen-command-integrate --package frb_example/flutter_via_integrate --coverage > artifacts/generate-integrate-flutter-via-integrate.log 2>&1
 
       - name: Generate flutter_package integrate output
         id: generate_integrate_flutter_package
         continue-on-error: true
         run: |
           mkdir -p artifacts
-          ./frb_internal generate-run-frb-codegen-command-integrate --set-exit-if-changed --package frb_example/flutter_package --coverage > artifacts/generate-integrate-flutter-package.log 2>&1
+          ./frb_internal generate-run-frb-codegen-command-integrate --package frb_example/flutter_package --coverage > artifacts/generate-integrate-flutter-package.log 2>&1
 
       - name: Collect codegen diff
         if: always()
