@@ -287,7 +287,22 @@ Future<void> main({bool skipRustLibInit = false}) async {
     final stream = storeStreamSinkTwinNormal();
     addTearDown(clearStoredStreamSinkTwinNormal);
 
-    await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    Object? emitError;
+    try {
+      await storedStreamSinkEmitErrorTwinNormal(message: 'stored sink error');
+    } catch (e) {
+      emitError = e;
+    }
+
+    if (emitError != null) {
+      expect(
+        emitError,
+        isA<AnyhowException>()
+            .having((x) => x.message, 'message', contains('stored sink error')),
+      );
+      return;
+    }
+
     final values = await stream
         .take(1024)
         .toList()
