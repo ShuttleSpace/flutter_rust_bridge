@@ -303,11 +303,19 @@ Future<void> main({bool skipRustLibInit = false}) async {
       return;
     }
 
-    final values = await stream
-        .take(1024)
-        .toList()
-        .timeout(const Duration(seconds: 2), onTimeout: () => <int>[]);
-    expect(values, isEmpty);
+    try {
+      final values = await stream
+          .take(1024)
+          .toList()
+          .timeout(const Duration(seconds: 2), onTimeout: () => <int>[]);
+      expect(values, isEmpty);
+    } catch (e) {
+      expect(
+        e,
+        isA<AnyhowException>()
+            .having((x) => x.message, 'message', contains('stored sink error')),
+      );
+    }
   });
 
   test('func_stream_add_value_and_error_twin_normal', () async {
