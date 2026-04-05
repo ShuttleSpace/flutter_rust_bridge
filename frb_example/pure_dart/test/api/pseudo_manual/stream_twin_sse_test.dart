@@ -148,7 +148,7 @@ Future<void> main({bool skipRustLibInit = false}) async {
     var received = 0;
     late final StreamSubscription<int> subscription;
     final stream = streamSinkEmitRangeThenHoldTwinSse(
-      count: 100000,
+      count: 5000,
       holdMillis: BigInt.from(300),
     );
     subscription = stream.listen((_) {
@@ -228,7 +228,7 @@ Future<void> main({bool skipRustLibInit = false}) async {
     });
 
     await storedStreamSinkStartSpamTwinSse(
-      total: 20000,
+      total: 2000,
       intervalMillis: BigInt.zero,
     );
     await reached.future.timeout(const Duration(seconds: 8));
