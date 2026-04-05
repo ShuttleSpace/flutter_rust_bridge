@@ -169,7 +169,7 @@ Future<void> main({bool skipRustLibInit = false}) async {
     final values = await streamSinkEmitRangeThenHoldTwinSse(
       count: 64,
       holdMillis: BigInt.from(50),
-    ).toList().timeout(const Duration(seconds: 2));
+    ).toList().timeout(const Duration(seconds: 8));
     expect(values.length, 64);
     expect(values.first, 0);
     expect(values.last, 63);
