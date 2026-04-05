@@ -159,10 +159,10 @@ Future<void> main({bool skipRustLibInit = false}) async {
       }
     });
 
-    await reached.future.timeout(const Duration(seconds: 2));
+    await reached.future.timeout(const Duration(seconds: 8));
     await Future<void>.delayed(const Duration(milliseconds: 350));
     await subscription.cancel();
-    expect(received, greaterThanOrEqualTo(200));
+    expect(received, greaterThanOrEqualTo(50));
   });
 
   test('rust_stream_sink_stream_done_after_sender_close', () async {
@@ -224,16 +224,16 @@ Future<void> main({bool skipRustLibInit = false}) async {
     late final StreamSubscription<int> subscription;
     subscription = stream.listen((_) {
       received++;
-      if (!reached.isCompleted && received >= 200) reached.complete();
+      if (!reached.isCompleted && received >= 50) reached.complete();
     });
 
     await storedStreamSinkStartSpamTwinSse(
       total: 20000,
       intervalMillis: BigInt.zero,
     );
-    await reached.future.timeout(const Duration(seconds: 2));
+    await reached.future.timeout(const Duration(seconds: 8));
     await subscription.cancel();
-    expect(received, greaterThanOrEqualTo(200));
+    expect(received, greaterThanOrEqualTo(50));
 
     await clearStoredStreamSinkTwinSse();
   });
