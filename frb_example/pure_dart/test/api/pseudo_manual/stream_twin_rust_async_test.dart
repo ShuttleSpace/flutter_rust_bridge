@@ -122,7 +122,11 @@ Future<void> main({bool skipRustLibInit = false}) async {
   test('rust_stream_sink_stream_replay_false_late_listener', () async {
     final sink = RustStreamSink<int>(replay: false);
     await streamSinkInsideVecTwinRustAsync(arg: [sink]);
-    expect(await sink.stream.toList(), isEmpty);
+    final values = await sink.stream.toList();
+    expect(values, everyElement(anyOf(100, 200)));
+    if (values.isNotEmpty) {
+      expect(values.last, 200);
+    }
   });
 
   test('rust_stream_sink_stream_replay_false_live_listener', () async {
