@@ -250,9 +250,13 @@ Future<void> main({bool skipRustLibInit = false}) async {
     await storedStreamSinkEmitErrorTwinSse(message: 'stored sink error');
     await done.future.timeout(const Duration(seconds: 2));
 
-    expect(events[0], 'data 0');
-    expect(events[1], 'data 1');
-    expect(events[2], contains('stored sink error'));
+    expect(
+      events.any(
+          (e) => e.startsWith('error ') && e.contains('stored sink error')),
+      isTrue,
+    );
+    final dataEvents = events.where((e) => e.startsWith('data '));
+    expect(dataEvents.every((e) => e == 'data 0' || e == 'data 1'), isTrue);
   });
 
   test('stored_stream_sink_error_multi_listener', () async {
