@@ -8,19 +8,7 @@ For common development workflows, see the skills in `.claude/skills/`.
 
 ### Docker and devcontainer
 
-Optionally, you can use Docker and/or devcontainer to quickly get a standardized development environment. The related code is in `.devcontainer`.
-
-The published development image is `fzyzcjy/flutter_rust_bridge_dev`. It packages the Flutter + Rust toolchain used for flutter_rust_bridge development, including the nightly toolchain, `wasm-pack`, and Chromium for web testing.
-
-Prefer the full version tag when you want reproducible environments:
-
-```shell
-docker run --rm -it fzyzcjy/flutter_rust_bridge_dev:flutter-3.27.4-rust-1.88.0-nightly-2025-02-01 bash
-```
-
-Those version numbers are derived from the `ARG` values in `.devcontainer/Dockerfile`, which is the single source of truth. `latest` only means the current recommended image and is not intended for long-term reproducibility.
-
-The default devcontainer configuration still builds locally from `.devcontainer/Dockerfile`. If you want to use the prebuilt image manually, use the full version tag above or regenerate it from the current Dockerfile args after version bumps.
+Optionally, you can use Docker and/or devcontainer to quickly get a standardized development environment. The related code is in `.devcontainer`. For daily use, manual Docker commands, Apple Silicon notes, and publishing the dev Docker image, see `.claude/skills/frb-docker/SKILL.md`.
 
 ### The `./frb_internal`
 
@@ -28,6 +16,17 @@ The `./frb_internal whatever-command` (or `./frb_internal.bat`) delegates to the
 It contains all scripts to work on flutter_rust_bridge development.
 It as a similar role as [justfile](https://github.com/casey/just/blob/master/justfile), makefile, etc.
 For example, `./frb_internal precommit --mode fast` (or `--mode slow`) runs code generator, formatter, etc for you.
+
+### CI autofix for generated changes
+
+If generated or normalized files are missing from a pull request, the `Precommit Autofix` bot comment explains how to apply its patch artifact locally.
+For fork pull requests, a follow-up trusted workflow posts the comment after the patch workflow completes, as the latter runs with read-only permissions.
+
+### Temporarily narrow CI while iterating
+
+When a PR needs several quick CI iterations, it is fine to temporarily make unrelated jobs not trigger, for example by adding an always-false `if` guard or otherwise narrowing the workflow to the jobs you are actively debugging.
+Keep this as a separate temporary commit whenever possible, and revert it before the PR is ready for review or merge.
+The final PR should run the normal CI surface again, so reviewers can trust that the broad matrix was not accidentally bypassed.
 
 ### The `just codegen`
 

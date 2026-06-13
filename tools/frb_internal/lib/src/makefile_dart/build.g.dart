@@ -8,16 +8,16 @@ part of 'build.dart';
 // CliGenerator
 // **************************************************************************
 
-T _$enumValueHelper<T>(Map<T, String> enumValues, String source) =>
-    enumValues.entries
-        .singleWhere(
-          (e) => e.value == source,
-          orElse: () => throw ArgumentError(
-            '`$source` is not one of the supported values: '
-            '${enumValues.values.join(', ')}',
-          ),
-        )
-        .key;
+T _$enumValueHelper<T>(Map<T, String> enumValues, String source) => enumValues
+    .entries
+    .singleWhere(
+      (e) => e.value == source,
+      orElse: () => throw ArgumentError(
+        '`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}',
+      ),
+    )
+    .key;
 
 BuildFlutterConfig _$parseBuildFlutterConfigResult(ArgResults result) =>
     BuildFlutterConfig(
@@ -33,17 +33,27 @@ const _$BuildTargetEnumMapBuildCli = <BuildTarget, String>{
   BuildTarget.linux: 'linux',
   BuildTarget.androidAab: 'android-aab',
   BuildTarget.androidApk: 'android-apk',
-  BuildTarget.ios: 'ios'
+  BuildTarget.ios: 'ios',
+  BuildTarget.ohos: 'ohos',
 };
 
-ArgParser _$populateBuildFlutterConfigParser(ArgParser parser) => parser
-  ..addOption(
-    'target',
-    allowed: ['windows', 'macos', 'linux', 'android-aab', 'android-apk', 'ios'],
-  );
+ArgParser _$populateBuildFlutterConfigParser(ArgParser parser) =>
+    parser..addOption(
+      'target',
+      allowed: [
+        'windows',
+        'macos',
+        'linux',
+        'android-aab',
+        'android-apk',
+        'ios',
+        'ohos',
+      ],
+    );
 
-final _$parserForBuildFlutterConfig =
-    _$populateBuildFlutterConfigParser(ArgParser());
+final _$parserForBuildFlutterConfig = _$populateBuildFlutterConfigParser(
+  ArgParser(),
+);
 
 BuildFlutterConfig parseBuildFlutterConfig(List<String> args) {
   final result = _$parserForBuildFlutterConfig.parse(args);

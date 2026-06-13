@@ -11,9 +11,9 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  FRB_MAIN_RUST_VERSION: 1.88.0
-  FRB_MAIN_DART_VERSION: 3.6.2
-  FRB_MAIN_FLUTTER_VERSION: 3.27.4
+  FRB_MAIN_RUST_VERSION: 1.93.1
+  FRB_MAIN_DART_VERSION: 3.11.0
+  FRB_MAIN_FLUTTER_VERSION: 3.44.0
 
 jobs:
   test_mimic_quickstart:
@@ -33,6 +33,9 @@ jobs:
           - cargo-binstall
           # - scoop # TODO re-enable after configured
           # - homebrew # TODO re-enable after configured
+        release_channel:
+          - stable
+          - unstable
         exclude:
           - { image: windows-2022, codegen_install_mode: homebrew }
           - { image: macos-15-intel, codegen_install_mode: scoop }
@@ -42,8 +45,12 @@ jobs:
     steps:
       # setup
       - uses: catchpoint/workflow-telemetry-action@v2
+        continue-on-error: true
+        env:
+          WORKFLOW_TELEMETRY_SERVER_PORT: 7778
         with:
           comment_on_pr: false
+          job_summary: false
       - uses: actions/checkout@v5
         with:
           submodules: recursive
@@ -66,4 +73,4 @@ jobs:
         uses: pyvista/setup-headless-display-action@v4
 
       # execute
-      - run: ./frb_internal post-release-mimic-quickstart --codegen-install-mode ${{ matrix.codegen_install_mode }}
+      - run: ./frb_internal post-release-mimic-quickstart --codegen-install-mode ${{ matrix.codegen_install_mode }} --release-channel ${{ matrix.release_channel }}

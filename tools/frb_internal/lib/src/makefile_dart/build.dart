@@ -12,28 +12,23 @@ part 'build.g.dart';
 
 List<Command<void>> createCommands() {
   return [
-    SimpleConfigCommand('build-flutter', buildFlutter,
-        _$populateBuildFlutterConfigParser, _$parseBuildFlutterConfigResult),
+    SimpleConfigCommand(
+      'build-flutter',
+      buildFlutter,
+      _$populateBuildFlutterConfigParser,
+      _$parseBuildFlutterConfigResult,
+    ),
   ];
 }
 
 // We do not test web, since it is already tested when building the demo on website
-enum BuildTarget {
-  windows,
-  macos,
-  linux,
-  androidAab,
-  androidApk,
-  ios,
-}
+enum BuildTarget { windows, macos, linux, androidAab, androidApk, ios, ohos }
 
 @CliOptions()
 class BuildFlutterConfig {
   final BuildTarget target;
 
-  const BuildFlutterConfig({
-    required this.target,
-  });
+  const BuildFlutterConfig({required this.target});
 }
 
 // ref: https://docs.flutter.dev/deployment
@@ -65,7 +60,11 @@ Future<void> buildFlutter(BuildFlutterConfig config) async {
       // https://docs.flutter.dev/deployment/linux
       // https://stackoverflow.com/questions/73278689/how-to-run-a-standalone-linux-app-built-with-flutter
       await exec('flutter build linux --verbose', relativePwd: package);
-      copyArtifacts(['build/linux/x64/release/bundle']);
+      copyArtifacts([
+        linuxBuildBundlePathForTesting(
+          machineArchitecture: currentMachineArchitectureForTesting(),
+        ),
+      ]);
 
     case BuildTarget.androidAab:
       // https://docs.flutter.dev/deployment/android
@@ -79,8 +78,47 @@ Future<void> buildFlutter(BuildFlutterConfig config) async {
 
     case BuildTarget.ios:
       // https://docs.flutter.dev/deployment/ios
-      await exec('flutter build ipa --no-codesign --verbose',
-          relativePwd: package);
+      await exec(
+        'flutter build ipa --no-codesign --verbose',
+        relativePwd: package,
+      );
       copyArtifacts(['build/ios/archive']);
+
+    case BuildTarget.ohos:
+      await exec(
+        'flutter build hap --no-codesign --verbose',
+        relativePwd: package,
+      );
+      copyArtifacts(['build/ohos/hap']);
   }
 }
+
+String linuxBuildBundlePathForTesting({required String machineArchitecture}) =>
+    'build/linux/${_linuxFlutterArchitecture(machineArchitecture)}/release/bundle';
+
+String currentMachineArchitectureForTesting() {
+  try {
+    final result = Process.runSync('uname', ['-m']);
+    if (result.exitCode != 0) {
+      throw StateError(
+        'Failed to detect machine architecture: ${result.stderr}',
+      );
+    }
+
+    return (result.stdout as String).trim();
+  } on ProcessException catch (error) {
+    throw StateError(
+      'Failed to run "uname" to detect machine architecture: ${error.message}',
+    );
+  }
+}
+
+String _linuxFlutterArchitecture(String machineArchitecture) =>
+    switch (machineArchitecture) {
+      'x86_64' || 'amd64' => 'x64',
+      'aarch64' || 'arm64' => 'arm64',
+      'riscv64' => 'riscv64',
+      _ => throw UnsupportedError(
+        'Unsupported Linux machine architecture: $machineArchitecture',
+      ),
+    };

@@ -118,7 +118,7 @@ class AndroidEnvironment {
 
     final cxxKey = 'CXX_${target.rust}';
     final cxxValue = path.join(toolchainPath, 'clang++$exe');
-    final cxxfFlagsKey = 'CXXFLAGS_${target.rust}';
+    final cxxFlagsKey = 'CXXFLAGS_${target.rust}';
     final cxxFlagsValue = targetArg;
 
     final linkerKey =
@@ -155,7 +155,7 @@ class AndroidEnvironment {
       ccKey: ccValue,
       cfFlagsKey: cFlagsValue,
       cxxKey: cxxValue,
-      cxxfFlagsKey: cxxFlagsValue,
+      cxxFlagsKey: cxxFlagsValue,
       ranlibKey: ranlibValue,
       rustFlagsKey: rustFlagsValue,
       linkerKey: selfPath,
@@ -189,7 +189,21 @@ class AndroidEnvironment {
     if (rustFlags.isNotEmpty) {
       rustFlags = '$rustFlags\x1f';
     }
-    rustFlags = '$rustFlags-L\x1f$workaroundDir';
+    if (["arm64-v8a", "x86_64"].contains(target.android)) {
+      rustFlags = '$rustFlags-L\x1f$workaroundDir\x1f';
+
+      const pageSizeArgs = [
+        "-C",
+        "link-arg=-Wl,--hash-style=both",
+        "-C",
+        "link-arg=-Wl,-z,max-page-size=16384"
+      ];
+      final pageSizeArgsString = pageSizeArgs.join("\x1f");
+
+      rustFlags = '$rustFlags$pageSizeArgsString';
+    } else {
+      rustFlags = '$rustFlags-L\x1f$workaroundDir';
+    }
     return rustFlags;
   }
 }
