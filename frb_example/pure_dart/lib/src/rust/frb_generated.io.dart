@@ -56841,7 +56841,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__clear_stored_stream_sink_twin_normalPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__clear_stored_stream_sink_twin_normal');
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__clear_stored_stream_sink_twin_normal',
+  );
   late final _wire__crate__api__stream__clear_stored_stream_sink_twin_normal =
       _wire__crate__api__stream__clear_stored_stream_sink_twin_normalPtr
           .asFunction<void Function(int)>();
@@ -56857,7 +56858,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__clear_stored_stream_sink_twin_rust_asyncPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__clear_stored_stream_sink_twin_rust_async');
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__clear_stored_stream_sink_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__clear_stored_stream_sink_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__clear_stored_stream_sink_twin_rust_asyncPtr
           .asFunction<void Function(int)>();
@@ -56879,10 +56881,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__clear_stored_stream_sink_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__clear_stored_stream_sink_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__clear_stored_stream_sink_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__clear_stored_stream_sink_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__clear_stored_stream_sink_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -56904,10 +56911,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__clear_stored_stream_sink_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__clear_stored_stream_sink_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__clear_stored_stream_sink_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__clear_stored_stream_sink_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__clear_stored_stream_sink_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112456,11 +112468,15 @@ class RustLibWire implements BaseWire {
     );
   }
 
-  late final _wire__crate__api__stream__store_stream_sink_twin_normalPtr = _lookup<
+  late final _wire__crate__api__stream__store_stream_sink_twin_normalPtr =
+      _lookup<
           ffi.NativeFunction<
               ffi.Void Function(
-                  ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-      'frbgen_frb_example_pure_dart_wire__crate__api__stream__store_stream_sink_twin_normal');
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__store_stream_sink_twin_normal',
+  );
   late final _wire__crate__api__stream__store_stream_sink_twin_normal =
       _wire__crate__api__stream__store_stream_sink_twin_normalPtr.asFunction<
           void Function(int, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>();
@@ -112478,10 +112494,13 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__store_stream_sink_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__store_stream_sink_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__store_stream_sink_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__store_stream_sink_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__store_stream_sink_twin_rust_asyncPtr
           .asFunction<
@@ -112504,10 +112523,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__store_stream_sink_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__store_stream_sink_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__store_stream_sink_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__store_stream_sink_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__store_stream_sink_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112529,10 +112553,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__store_stream_sink_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__store_stream_sink_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__store_stream_sink_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__store_stream_sink_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__store_stream_sink_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112549,10 +112578,13 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stored_stream_sink_emit_error_twin_normalPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal',
+  );
   late final _wire__crate__api__stream__stored_stream_sink_emit_error_twin_normal =
       _wire__crate__api__stream__stored_stream_sink_emit_error_twin_normalPtr
           .asFunction<
@@ -112571,10 +112603,13 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_error_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64, ffi.Pointer<wire_cst_list_prim_u_8_strict>)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_error_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_error_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_error_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_error_twin_rust_asyncPtr
           .asFunction<
@@ -112597,10 +112632,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_error_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_error_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_error_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_error_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_error_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112622,10 +112662,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_error_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_error_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_error_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_error_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_error_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112642,7 +112687,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stored_stream_sink_emit_many_twin_normalPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal');
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal',
+  );
   late final _wire__crate__api__stream__stored_stream_sink_emit_many_twin_normal =
       _wire__crate__api__stream__stored_stream_sink_emit_many_twin_normalPtr
           .asFunction<void Function(int, int)>();
@@ -112660,7 +112706,8 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_many_twin_rust_asyncPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_many_twin_rust_async');
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_many_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_many_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_emit_many_twin_rust_asyncPtr
           .asFunction<void Function(int, int)>();
@@ -112682,10 +112729,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_many_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_many_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_many_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_many_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_emit_many_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112707,10 +112759,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_many_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_many_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_many_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_many_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_emit_many_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112729,9 +112786,10 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stored_stream_sink_start_spam_twin_normalPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Uint32, ffi.Uint64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal');
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.Uint32, ffi.Uint64)>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal',
+  );
   late final _wire__crate__api__stream__stored_stream_sink_start_spam_twin_normal =
       _wire__crate__api__stream__stored_stream_sink_start_spam_twin_normalPtr
           .asFunction<void Function(int, int, int)>();
@@ -112751,9 +112809,10 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_start_spam_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Uint32, ffi.Uint64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_start_spam_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Int64, ffi.Uint32, ffi.Uint64)>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_start_spam_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_start_spam_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stored_stream_sink_start_spam_twin_rust_asyncPtr
           .asFunction<void Function(int, int, int)>();
@@ -112775,10 +112834,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_start_spam_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_start_spam_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_start_spam_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_start_spam_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stored_stream_sink_start_spam_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112800,10 +112864,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_start_spam_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_start_spam_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_start_spam_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_start_spam_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stored_stream_sink_start_spam_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112876,10 +112945,14 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stream_sink_emit_many_twin_normalPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_many_twin_normal');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_many_twin_normal',
+  );
   late final _wire__crate__api__stream__stream_sink_emit_many_twin_normal =
       _wire__crate__api__stream__stream_sink_emit_many_twin_normalPtr
           .asFunction<
@@ -112901,10 +112974,14 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_many_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_many_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_many_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_many_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_many_twin_rust_asyncPtr
           .asFunction<
@@ -112928,10 +113005,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_many_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_many_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_many_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_many_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_many_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112953,10 +113035,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_many_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_many_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_many_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_many_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_many_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -112977,18 +113064,24 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normalPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                      ffi.Uint32,
-                      ffi.Uint64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+                ffi.Uint64,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal',
+  );
   late final _wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normal =
       _wire__crate__api__stream__stream_sink_emit_range_then_hold_twin_normalPtr
           .asFunction<
               void Function(
-                  int, ffi.Pointer<wire_cst_list_prim_u_8_strict>, int, int)>();
+                int,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                int,
+                int,
+              )>();
 
   void
       wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_async(
@@ -113007,18 +113100,24 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(
-                      ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>,
-                      ffi.Uint32,
-                      ffi.Uint64)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+                ffi.Uint64,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_then_hold_twin_rust_asyncPtr
           .asFunction<
               void Function(
-                  int, ffi.Pointer<wire_cst_list_prim_u_8_strict>, int, int)>();
+                int,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                int,
+                int,
+              )>();
 
   void
       wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_sse(
@@ -113037,10 +113136,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_then_hold_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -113062,10 +113166,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_then_hold_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_then_hold_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_then_hold_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_then_hold_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_then_hold_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -113084,10 +113193,14 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__stream__stream_sink_emit_range_twin_normalPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_range_twin_normal');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__stream__stream_sink_emit_range_twin_normal',
+  );
   late final _wire__crate__api__stream__stream_sink_emit_range_twin_normal =
       _wire__crate__api__stream__stream_sink_emit_range_twin_normalPtr
           .asFunction<
@@ -113109,10 +113222,14 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_twin_rust_asyncPtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64,
-                      ffi.Pointer<wire_cst_list_prim_u_8_strict>, ffi.Uint32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_twin_rust_async');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<wire_cst_list_prim_u_8_strict>,
+                ffi.Uint32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_twin_rust_async',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_twin_rust_async =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async__stream_sink_emit_range_twin_rust_asyncPtr
           .asFunction<
@@ -113136,10 +113253,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_twin_rust_async_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_twin_rust_async_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_twin_rust_async_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_twin_rust_async_sse =
       _wire__crate__api__pseudo_manual__stream_twin_rust_async_sse__stream_sink_emit_range_twin_rust_async_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
@@ -113161,10 +113283,15 @@ class RustLibWire implements BaseWire {
 
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_twin_ssePtr =
       _lookup<
-              ffi.NativeFunction<
-                  ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Uint8>,
-                      ffi.Int32, ffi.Int32)>>(
-          'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_twin_sse');
+          ffi.NativeFunction<
+              ffi.Void Function(
+                ffi.Int64,
+                ffi.Pointer<ffi.Uint8>,
+                ffi.Int32,
+                ffi.Int32,
+              )>>(
+    'frbgen_frb_example_pure_dart_wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_twin_sse',
+  );
   late final _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_twin_sse =
       _wire__crate__api__pseudo_manual__stream_twin_sse__stream_sink_emit_range_twin_ssePtr
           .asFunction<void Function(int, ffi.Pointer<ffi.Uint8>, int, int)>();
